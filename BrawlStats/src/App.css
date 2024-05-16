@@ -1,0 +1,71 @@
+/* General body styling to remove margin and set font */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* Root element styling */
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: #1b1b1b; /* Light grey background */
+}
+
+/* Container to center all content and apply margin and padding uniformly */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for the container */
+  background-color: #333333; /* White background for the content */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 600px; /* Maximum width of the container */
+}
+
+.win-rate{
+  color: orange
+}
+
+/* Form styling */
+form {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 70%; /* Relative width */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 5px; /* Rounded corners for the input field */
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  background-color: #007BFF; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  input, button {
+    width: 100%; /* Full width on smaller screens */
+    margin: 10px 0; /* Stack vertically with space between */
+  }
+}
