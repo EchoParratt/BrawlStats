@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import belle_icon from "./assets/Belle_Portrait.webp";  
 import leon_icon from "./assets/Leon_Portrait.webp";
+import jessie_icon from "./assets/Jessie_Portrait.webp"
+import spike_icon from "./assets/Spike_Portrait.webp"
+import trophy_icon from "./assets/trophy.webp"
+import club_icon from"./assets/Ranking.webp"
+import info_icon from"./assets/Info-Round.png"
 import './App.css';
 
 
@@ -34,6 +39,11 @@ function App() {
   };
 
   return (
+    <div>
+    <h1>BrawlStats</h1>
+    <div className ='top-right-icon'>
+    <img src={info_icon} alt="info-icon"/>
+    </div>
     <div className='container'>
       <form onSubmit={handleSubmit}>
         <input
@@ -47,21 +57,27 @@ function App() {
       {error && <p>Error: {error}</p>}
       {playerData && <div>
         <p>Name: {playerData.name}</p>
-        <div className = 'trophies'>
+        <div className = 'icon-and-text'>
         <p>Trophies: {playerData.trophies}</p>
+        <img src={trophy_icon} alt="Trophy" className="icon-small"/>
         </div>
+        <div className ='icon-and-text'>
         <p>Club: {playerData.club}</p>
+        <img src={club_icon} alt="Club" className="icon-small"/>
+        </div>
         <div className = 'winrate'>
         <p>Win Rate: <span className="win-rate">{playerData.win_rate}</span></p>
         </div>
         <p>Most Played Brawler: {playerData.most_played_brawler} ({playerData.most_played_count} times)</p>
-        <img src={belle_icon}/>
+        <img className = 'mpb'src={spike_icon}/>
         <div className = 'winRatio'>
         <p>Highest Win Ratio Brawler: {playerData.highest_win_ratio_brawler} ({playerData.highest_win_ratio})</p>
         </div>
-        <img src={leon_icon}/>
+        <img className = 'wrb' src={jessie_icon}/>
       </div>}
     </div>
+    </div>
+
   );
 }
 

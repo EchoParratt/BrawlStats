@@ -30,13 +30,50 @@ body, html {
 }
 
 .win-rate{
-  color: orange
+  color: green
+}
+
+h1{
+  font-family: 'Roboto Mono', monospace;
+  color: #aa00ff;
+  font-size: 38px;;
+  font-weight: 800;
+  padding-left: 55px;;
+
+}
+
+.icon-small {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;;
+
+}
+
+.icon-and-text {
+  display: flex; /* Aligns children (icon and text) in a row */
+  align-items: center;
+  margin-left: 120px;
+}
+
+.top-right-icon {
+  position: absolute;
+  top: 80px; /* Adjust based on your layout */
+  right: 100px; /* Adjust based on your layout */
+}
+
+.top-right-icon img {
+  width: 30px; /* Size of the icon */
+  height: 30px; /* Size of the icon */
+}
+
+.mpb, .wrb {
+  border-radius: 20px;
 }
 
 /* Form styling */
 form {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 /* Input field styling */
@@ -46,21 +83,55 @@ input {
   width: 70%; /* Relative width */
   border: 1px solid #ccc; /* Light grey border */
   border-radius: 5px; /* Rounded corners for the input field */
+  font-family: 'Roboto Mono', monospace;
 }
 
 /* Button styling */
-button {
-  padding: 10px 20px;
-  background-color: #007BFF; /* Blue background */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer; /* Pointer cursor on hover */
+
+#root button {
+  background-color: #aa00ff;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  margin-top: 20px;
+  font-family: 'Roboto Mono', monospace;
+
 }
 
-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.button:hover,
+.button-7:focus {
+  background-color: #07c;
 }
+
+.button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
