@@ -13,6 +13,15 @@ import hank_icon from "./assets/Hank_Portrait.webp";
 import lily_icon from "./assets/Lily_Portrait.webp"
 import doug_icon from "./assets/Doug_Portrait.webp"
 import buster_icon from "./assets/Buster_Portrait.webp"
+import jacky_icon from "./assets/Jacky_Portrait.webp"
+import meg_icon from "./assets/Meg_Portrait.webp"
+import sandy_icon from "./assets/Sandy_Portrait.webp"
+import mrp_icon from "./assets/Mr._P_Portrait.webp"
+import sam_icon from "./assets/Sam_Portrait.webp"
+import byron_icon from "./assets/Byron_Portrait.webp"
+
+
+import TrophyGraph from './graph.jsx';
 import './App.css';
 
 function App() {
@@ -42,21 +51,28 @@ function App() {
   };
   
   const brawlerIcons = {
-    Belle: belle_icon,
-    Leon: leon_icon,
-    Jessie: jessie_icon,
-    Spike: spike_icon,
-    Frank: frank_icon,
-    Squeak: squeak_icon,
-    Hank: hank_icon,
-    Lily: lily_icon,
-    Doug: doug_icon,
-    Buster: buster_icon,
+    BELLE: belle_icon,
+    LEON: leon_icon,
+    JESSIE: jessie_icon,
+    SPIKE: spike_icon,
+    FRANK: frank_icon,
+    SQUEAK: squeak_icon,
+    HANK: hank_icon,
+    LILY: lily_icon,
+    DOUG: doug_icon,
+    BUSTER: buster_icon,
+    'MR. P': mrp_icon,
+    SAM: sam_icon,
+    MEG: meg_icon,
+    SANDY: sandy_icon,
+    JACKY: jacky_icon,
+    BYRON: byron_icon
+
     // Add other mappings as necessary
   };
 
   const getBrawlerIcon = (brawlerName) => {
-    return brawlerIcons[brawlerName] || default_icon; // Return the brawler icon or a default icon if not found
+    return brawlerIcons[brawlerName] || leon_icon; // Return the brawler icon or a default icon if not found
   };
 
 
@@ -82,7 +98,8 @@ function App() {
       {playerData && (
         <div className="content-container">
           <div className="box left-box">
-            {/* Placeholder for future content or left content */}
+            <h2>Trophy Progression</h2>
+            <TrophyGraph playerTag={playerTag}/>
           </div>
           <div className="box middle-box">
             <h2>Player Information</h2>
@@ -91,17 +108,17 @@ function App() {
             <p><strong>Club:</strong> {playerData.club}</p>
             <p><strong>Win Rate:</strong> {playerData.win_rate}</p>
             <p><strong>Most Played:</strong> {playerData.most_played_brawler}</p>
-            <img className='mpb' src={belle_icon} alt="Most Played Brawler" />
-            <p><strong>Best Win Rate:</strong> {playerData.highest_win_ratio_brawler}</p>
-            <img className='wrb' src={leon_icon} alt="Best Win Rate Brawler" />
+            <img className='mpb' src={getBrawlerIcon(playerData.most_played_brawler)} alt="Most Played Brawler" />
+            <p><strong>Most Wins:</strong> {playerData.highest_win_ratio_brawler} <strong>/</strong> {playerData.highest_wins}</p>
+            <img className='wrb' src={getBrawlerIcon(playerData.highest_win_ratio_brawler)} alt="Best Win Rate Brawler" />
           </div>
           <div className="box right-box">
-            <h2>Top 3 Brawlers</h2>
-            {playerData.top_3_brawlers && playerData.top_3_brawlers.map((brawler, index) => (
+            <h2>Current Meta</h2>
+            {playerData.top_8_brawlers && playerData.top_8_brawlers.map((brawler, index) => (
               <div key={index} className ='brawler-info'>
                 <span className="brawler-name">{brawler.name}</span>
                 <span className='brawler-win-rate'>Win Rate: {brawler.winRate}</span>
-                <span><img src={getBrawlerIcon(brawler.name)} className="brawler-image" alt={brawler.name} /></span>
+                <span><img src={getBrawlerIcon(brawler.name.toUpperCase())} className="brawler-image" alt={brawler.name} /></span>
               </div>
             ))}
           </div>

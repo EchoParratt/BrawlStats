@@ -40,6 +40,18 @@ def analyze_battle_logs(battle_logs):
 
     return win_rate, win_count, loss_count, total_battles
 
+def process_battle_logs(battle_logs, current_trophies):
+    trophy_changes = []
+
+    for battle in battle_logs:
+        trophy_change = battle.battle.get('trophy_change', 0)  # Assuming 'trophyChange' is the key for trophy gain/loss
+        trophy_changes.append(trophy_change)
+
+    total_trophy_change = sum(trophy_changes)
+    starting_trophies = current_trophies - total_trophy_change
+
+    return trophy_changes, starting_trophies
+
 def find_most_played_brawler(battle_logs,player_tag):
     brawler_count = {}
 
@@ -85,17 +97,17 @@ def find_brawler_with_highest_win_ratio(battle_logs, player_tag):
                                 brawler_stats[brawler_name]['wins'] += 1
 
     # Calculate win ratios and find the brawler with the highest win ratio
-    highest_win_ratio = 0
+    highest_wins = 0
     brawler_with_highest_win_ratio = None
     for brawler, stats in brawler_stats.items():
         print(brawler)
         if stats['games'] > 0:
-            win_ratio = stats['wins'] / stats['games']
-            if win_ratio > highest_win_ratio:
-                highest_win_ratio = win_ratio
+            win_ratio = stats['wins'] 
+            if win_ratio > highest_wins:
+                highest_wins = win_ratio
                 brawler_with_highest_win_ratio = brawler
 
-    return brawler_with_highest_win_ratio, highest_win_ratio
+    return brawler_with_highest_win_ratio, highest_wins
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -121,10 +133,10 @@ def get_top_brawler():
 
     if tables:
         df = tables[0]  # Assume the first table is the correct one
-        top_three_brawlers = df.head(3)
+        top_eight_brawlers = df.head(8)
         top_brawlers_info = [
         {"name": row['Brawler'], "winRate": row['Adjusted Win Rate']}
-        for index, row in top_three_brawlers.iterrows()
+        for index, row in top_eight_brawlers.iterrows()
         ]
         return top_brawlers_info
     else:
@@ -139,8 +151,9 @@ def get_player_data(player_tag):
         battle_logs = client.get_battle_logs(player_tag)
         win_rate, win_count, loss_count, total_battles = analyze_battle_logs(battle_logs)
         most_played_brawler, most_played_count = find_most_played_brawler(battle_logs, player_tag)
-        brawler, win_ratio = find_brawler_with_highest_win_ratio(battle_logs, player_tag)
+        brawler, wins = find_brawler_with_highest_win_ratio(battle_logs, player_tag)
         top_stars = get_top_brawler()
+        trophy_changes, starting_trophies = process_battle_logs(battle_logs,player.trophies)
 
         return jsonify({
             "name": player.name,
@@ -150,8 +163,11 @@ def get_player_data(player_tag):
             "most_played_brawler": most_played_brawler,
             "most_played_count": most_played_count,
             "highest_win_ratio_brawler": brawler,
-            "highest_win_ratio": f"{win_ratio:.2f}%",
-            "top_3_brawlers" : top_stars
+            "highest_wins": wins,
+            "top_8_brawlers" : top_stars,
+            "trophy_changes": trophy_changes,
+            "starting_trophies": starting_trophies
+
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 400
