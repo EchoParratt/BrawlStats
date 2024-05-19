@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import brawlstats
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjZlMDhjZjFmLTM5ODEtNDVmYS1iNjU3LWQwYWQwYTg3YzEyMSIsImlhdCI6MTcxNTg0MTY1NCwic3ViIjoiZGV2ZWxvcGVyL2JhZDg3OWQyLTVhYmMtOWEyZi1jNzk4LTA5YWRlNzMwMDhkNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzAuNjYuMTU3LjEzNSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.-OWA7QtwsZ51JduTNJDlfGFCfJ1QwznHvGDnvxysW00eH27zAZzZgNbMbjQAfjCLQ-x1jYehFHuXUPPHsZzmpw'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjE3YWQzYjMyLTY1ZDYtNGQxYS04YjU1LTZhMmUwN2IzMTEzYiIsImlhdCI6MTcxNjA3MDMwMCwic3ViIjoiZGV2ZWxvcGVyL2JhZDg3OWQyLTVhYmMtOWEyZi1jNzk4LTA5YWRlNzMwMDhkNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzAuNjYuMTU3LjEzNSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.YldRTfEFDJbGX3KJ0LDCFIxDjLlyrO0yR0hbLvOA7PWUBwRPEP6H2IqVv_cSC_k2rW9Daq1H7TdS3sHk59NPpg'
 client = brawlstats.Client(token, is_async=False)
 
 
@@ -92,6 +97,41 @@ def find_brawler_with_highest_win_ratio(battle_logs, player_tag):
 
     return brawler_with_highest_win_ratio, highest_win_ratio
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
+def get_top_brawler():
+    # Set up Chrome options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/brawler'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+
+    if tables:
+        df = tables[0]  # Assume the first table is the correct one
+        top_three_brawlers = df.head(3)
+        top_brawlers_info = [
+        {"name": row['Brawler'], "winRate": row['Adjusted Win Rate']}
+        for index, row in top_three_brawlers.iterrows()
+        ]
+        return top_brawlers_info
+    else:
+        return "No tables found"
+
+
+
 @app.route('/player/<player_tag>', methods=['GET'])
 def get_player_data(player_tag):
     try:
@@ -100,6 +140,7 @@ def get_player_data(player_tag):
         win_rate, win_count, loss_count, total_battles = analyze_battle_logs(battle_logs)
         most_played_brawler, most_played_count = find_most_played_brawler(battle_logs, player_tag)
         brawler, win_ratio = find_brawler_with_highest_win_ratio(battle_logs, player_tag)
+        top_stars = get_top_brawler()
 
         return jsonify({
             "name": player.name,
@@ -109,7 +150,8 @@ def get_player_data(player_tag):
             "most_played_brawler": most_played_brawler,
             "most_played_count": most_played_count,
             "highest_win_ratio_brawler": brawler,
-            "highest_win_ratio": f"{win_ratio:.2f}%"
+            "highest_win_ratio": f"{win_ratio:.2f}%",
+            "top_3_brawlers" : top_stars
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 400

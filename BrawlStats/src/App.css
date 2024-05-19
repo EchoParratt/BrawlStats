@@ -16,21 +16,32 @@ body, html {
   background-color: #1b1b1b; /* Light grey background */
 }
 
-/* Container to center all content and apply margin and padding uniformly */
-.container {
+.box {
+  flex: 1; /* Each box will take equal width */
+  padding: 20px; /* Padding inside each box */
+  border: 2px solid #ccc; /* Light grey border for boxes */
+  margin: 10px;
+  border-radius: 10px; /* Rounded corners for boxes */
+  display: flex;
+  flex-direction: column; /* Makes the content of the boxes stack vertically */
+  width: 400px;
+}
+
+.right-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for the container */
-  background-color: #333333; /* White background for the content */
-  border-radius: 10px; /* Rounded corners */
-  max-width: 600px; /* Maximum width of the container */
+  align-items: flex-start;
+}
+
+/* Container to center all content and apply margin and padding uniformly */
+.content-container {
+  display: flex;
+  justify-content: space-around; /* Distributes space around items */
+  margin: 20px;
 }
 
 .win-rate{
-  color: green
+  color: orange
 }
 
 h1{
@@ -39,8 +50,9 @@ h1{
   font-size: 38px;;
   font-weight: 800;
   padding-left: 55px;;
-
 }
+
+
 
 .icon-small {
   width: 20px;
@@ -52,7 +64,7 @@ h1{
 .icon-and-text {
   display: flex; /* Aligns children (icon and text) in a row */
   align-items: center;
-  margin-left: 120px;
+  margin-left: 91px;
 }
 
 .top-right-icon {
@@ -68,6 +80,8 @@ h1{
 
 .mpb, .wrb {
   border-radius: 20px;
+  height: 80px;
+  width: 80px;
 }
 
 /* Form styling */
@@ -122,13 +136,45 @@ input {
   background-color: #07c;
 }
 
+.brawler-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Add space between each brawler-info */
+}
+
+.brawler-info span {
+  flex: 1; /* Allow text to take up remaining space */
+  text-align: left; /* Align text to the left */
+}
+
+
+.brawler-info .brawler-name {
+  width: 80px; /* Set a fixed width for the brawler name */
+}
+
+.brawler-info .brawler-win-rate {
+  width: 100px; /* Set a fixed width for the win rate */
+}
+
+
 .button:focus {
   box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.right-box h2 {
+  margin-bottom: 15px; /* Space below the heading */
 }
 
 .button:active {
   background-color: #0064bd;
   box-shadow: none;
+}
+
+.brawler-image{
+  border-radius: 10px;
+  height: 45px;
+  width: 45px;
+  margin-left: 50px;
 }
 
 
