@@ -20,6 +20,11 @@ import mrp_icon from "./assets/Mr._P_Portrait.webp"
 import sam_icon from "./assets/Sam_Portrait.webp"
 import byron_icon from "./assets/Byron_Portrait.webp"
 
+import { square } from 'ldrs'
+
+square.register()
+
+// Default values shown
 
 import TrophyGraph from './graph.jsx';
 import './App.css';
@@ -28,10 +33,13 @@ function App() {
   const [playerTag, setPlayerTag] = useState('');
   const [playerData, setPlayerData] = useState(null);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); 
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form submitted with playerTag:", playerTag);
+    setLoading(true);
     try {
       const response = await axios.get(`http://127.0.0.1:5000/player/${encodeURIComponent(playerTag)}`);
       console.log("Data received from server:", response.data);
@@ -47,6 +55,8 @@ function App() {
         setError(e.message);
       }
       setPlayerData(null);
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
   
@@ -78,10 +88,24 @@ function App() {
 
   return (
     <div className="app-container">
+      {loading && (
+        <div className="loading-container">
+          <l-square
+            size="70"
+            stroke="10"
+            stroke-length="0.25"
+            bg-opacity="0.1"
+            speed="1.2"
+            color="#aa00ff"
+          ></l-square>
+        </div>
+      )}
+      {!loading && (
       <div className="header">
         <h1>BrawlStats</h1>
       </div>
-      {!playerData && (
+      )}
+      {!loading && !playerData && (
         <div className="input-container">
           <form onSubmit={handleSubmit}>
             <input
@@ -95,7 +119,7 @@ function App() {
         </div>
       )}
       {error && <p className="error-message">{error}</p>}
-      {playerData && (
+      {!loading && playerData && (
         <div className="content-container">
           <div className="box left-box">
             <h2>Trophy Progression</h2>
@@ -104,8 +128,8 @@ function App() {
           <div className="box middle-box">
             <h2>Player Information</h2>
             <p><strong>Name:</strong> {playerData.name}</p>
-            <p><strong>Trophies:</strong> {playerData.trophies}</p>
-            <p><strong>Club:</strong> {playerData.club}</p>
+            <p><strong>Trophies:</strong> {playerData.trophies}<strong><img src ={trophy_icon} className='icon-small'/></strong></p>
+            <p><strong>Club:</strong> {playerData.club}<strong><img src = {club_icon} className='icon-small'/></strong></p>
             <p><strong>Win Rate:</strong> {playerData.win_rate}</p>
             <p><strong>Most Played:</strong> {playerData.most_played_brawler}</p>
             <img className='mpb' src={getBrawlerIcon(playerData.most_played_brawler)} alt="Most Played Brawler" />
@@ -129,5 +153,4 @@ function App() {
 }
 
 export default App;
-
 
