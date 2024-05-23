@@ -19,6 +19,19 @@ import sandy_icon from "./assets/Sandy_Portrait.webp"
 import mrp_icon from "./assets/Mr._P_Portrait.webp"
 import sam_icon from "./assets/Sam_Portrait.webp"
 import byron_icon from "./assets/Byron_Portrait.webp"
+import amber_icon from "./assets/Amber_Portrait.webp"
+import ruffs_icon from "./assets/Ruffs_Portrait.webp"
+import eve_icon from "./assets/Eve_Portrait.webp"
+import ash_icon from "./assets/Ash_Portrait.webp"
+import s_icon from "./assets/s.webp"
+import w_icon from "./assets/w.webp"
+import hz_icon from "./assets/hz.webp"
+import bb_icon from "./assets/bb.webp"
+import k_icon from "./assets/k.webp"
+import gg_icon from "./assets/gg.webp"
+
+
+
 
 import { square } from 'ldrs'
 
@@ -76,9 +89,22 @@ function App() {
     MEG: meg_icon,
     SANDY: sandy_icon,
     JACKY: jacky_icon,
-    BYRON: byron_icon
+    BYRON: byron_icon,
+    EVE: eve_icon,
+    AMBER: amber_icon,
+    RUFFS: ruffs_icon,
+    ASH: ash_icon
 
     // Add other mappings as necessary
+  };
+
+  const eventIcons = {
+    bb_brawler: bb_icon,
+    k_brawler: k_icon,
+    gg_brawler: gg_icon,
+    hz_brawler: hz_icon,
+    w_brawler: w_icon,
+    s_brawler: s_icon
   };
 
   const getBrawlerIcon = (brawlerName) => {
@@ -96,7 +122,7 @@ function App() {
             stroke-length="0.25"
             bg-opacity="0.1"
             speed="1.2"
-            color="#aa00ff"
+            color='#aaaaaa'
           ></l-square>
         </div>
       )}
@@ -123,17 +149,37 @@ function App() {
         <div className="content-container">
           <div className='left column'>
             <div className="top-left-box">
+              <div className ='box-header trophy-header'>
               <h2>Trophy Progression</h2>
+              </div>
               <TrophyGraph playerTag={playerTag}/>
             </div>
             <div className="bottom-left-box">
               {/* Add content here for the bottom left box */}
-              <h2>Additional Content</h2>
-              <p>Placeholder for additional content.</p>
+              <div className ='box-header mode-header'>
+                <h2>Daily Mode Hot Picks</h2>
+              </div>
+              <div className="event-brawlers">
+                {[
+                  { brawler: playerData.bb_brawler, event: 'bb_brawler' },
+                  { brawler: playerData.k_brawler, event: 'k_brawler' },
+                  { brawler: playerData.gg_brawler, event: 'gg_brawler' },
+                  { brawler: playerData.hz_brawler, event: 'hz_brawler' },
+                  { brawler: playerData.w_brawler, event: 'w_brawler' },
+                  { brawler: playerData.s_brawler, event: 's_brawler' }
+                ].map((item, index) => (
+                  <div key={index} className="event-brawler-pair">
+                    <img src={eventIcons[item.event]} alt={item.event} className="event-icon" />
+                    <img src={getBrawlerIcon(item.brawler.toUpperCase())} alt={item.brawler} className="brawler-icon" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="box middle-box">
-            <h2>Player Information</h2>
+            <div className ='box-header player-header'>
+              <h2>Player Information</h2>
+            </div>
             <p><strong>Name:</strong> {playerData.name}</p>
             <p><strong>Trophies:</strong> {playerData.trophies}<strong><img src ={trophy_icon} className='icon-small'/></strong></p>
             <p><strong>Club:</strong> {playerData.club}<strong><img src = {club_icon} className='icon-small'/></strong></p>
@@ -144,7 +190,9 @@ function App() {
             <img className='wrb' src={getBrawlerIcon(playerData.highest_win_ratio_brawler)} alt="Best Win Rate Brawler" />
           </div>
           <div className="box right-box">
-            <h2>Current Meta</h2>
+            <div className ='box-header meta-header'>
+              <h2>Current Meta</h2>
+            </div>
             {playerData.top_8_brawlers && playerData.top_8_brawlers.map((brawler, index) => (
               <div key={index} className ='brawler-info'>
                 <span className="brawler-name">{brawler.name}</span>

@@ -142,6 +142,125 @@ def get_top_brawler():
     else:
         return "No tables found"
 
+def brawl_ball():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/brawl-ball'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    bb_brawler = df.head(1)
+    for index, row in bb_brawler.iterrows():
+        return f"{row['Brawler']}"
+
+def knockout():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/knockout'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    k_brawler = df.head(1)
+    for index, row in k_brawler.iterrows():
+        return f"{row['Brawler']}"
+
+def gem_grab():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/gem-grab'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    gg_brawler = df.head(1)
+    for index, row in gg_brawler.iterrows():
+        return f"{row['Brawler']}"
+
+def hot_zone():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/hot-zone'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    hz_brawler = df.head(1)
+    for index, row in hz_brawler.iterrows():
+        return f"{row['Brawler']}"
+
+def wipeout():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/wipeout'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    w_brawler = df.head(1)
+    for index, row in w_brawler.iterrows():
+        return f"{row['Brawler']}"
+
+def showdown():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ensures Chrome runs in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    url = 'https://brawltime.ninja/tier-list/mode/solo-showdown'
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    tables = pd.read_html(html)
+    df = tables[0]
+    s_brawler = df.head(1)
+    for index, row in s_brawler.iterrows():
+        return f"{row['Brawler']}"
 
 
 @app.route('/player/<player_tag>', methods=['GET'])
@@ -154,6 +273,13 @@ def get_player_data(player_tag):
         brawler, wins = find_brawler_with_highest_win_ratio(battle_logs, player_tag)
         top_stars = get_top_brawler()
         trophy_changes, starting_trophies = process_battle_logs(battle_logs,player.trophies)
+        bb_brawler = brawl_ball()
+        k_brawler = knockout()
+        gg_brawler = gem_grab()
+        w_brawler = wipeout()
+        hz_brawler = hot_zone()
+        s_brawler = showdown()
+
 
         return jsonify({
             "name": player.name,
@@ -166,7 +292,16 @@ def get_player_data(player_tag):
             "highest_wins": wins,
             "top_8_brawlers" : top_stars,
             "trophy_changes": trophy_changes,
-            "starting_trophies": starting_trophies
+            "starting_trophies": starting_trophies,
+            "bb_brawler": bb_brawler,
+            "k_brawler": k_brawler,
+            "gg_brawler": gg_brawler,
+            "w_brawler": w_brawler,
+            "hz_brawler": hz_brawler,
+            "s_brawler": s_brawler
+
+
+
 
         })
     except Exception as e:

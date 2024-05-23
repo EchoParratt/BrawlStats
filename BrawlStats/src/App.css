@@ -25,6 +25,8 @@ body, html {
   display: flex;
   flex-direction: column; /* Makes the content of the boxes stack vertically */
   width: 400px;
+  overflow: hidden; /* Ensure contents do not overflow the box */
+
 }
 
 .right-box {
@@ -46,7 +48,7 @@ body, html {
 
 h1{
   font-family: 'Roboto Mono', monospace;
-  color: #aa00ff;
+  color: #ffffff;
   font-size: 38px;;
   font-weight: 800;
   display: flex;
@@ -66,6 +68,34 @@ h1{
   z-index: 1000;
   margin-right: 50px;
 }
+
+.box-header {
+  padding: 10px;
+  background-color: #3a3a3a; /* Background color for the header */
+  border-top-left-radius: 7.5px;
+  border-top-right-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  width: calc(100% + 40px); /* Make sure header spans full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+  height: 56px;
+}
+
+
+
+.box-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.5em;
+ 
+}
+
+
 
 
 
@@ -118,7 +148,7 @@ input {
 /* Button styling */
 
 #root button {
-  background-color: #aa00ff;
+  background-color: #aaaaaa;
   border: 1px solid transparent;
   border-radius: 3px;
   box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
@@ -152,7 +182,7 @@ input {
 
 .button:hover,
 .button-7:focus {
-  background-color: #07c;
+  background-color: #aaaaaa;
 }
 
 .brawler-info {
@@ -180,9 +210,6 @@ input {
   box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
 }
 
-.right-box h2 {
-  margin-bottom: 15px; /* Space below the heading */
-}
 
 .button:active {
   background-color: #0064bd;
@@ -219,24 +246,68 @@ input {
 }
 
 .top-left-box {
-  height: calc(50% - 67px); /* Adjust height to take half the height minus margin */
+  height: calc(50% - 40px); /* Adjust height to take half the height minus margin */
   margin-bottom: 20px;
 }
 
 .bottom-left-box {
-  height: calc(50% - 61px); /* Adjust height to take half the height minus margin */
+  height: calc(50% - 88px); /* Adjust height to take half the height minus margin */
   margin-top: 10px;
 }
 
 .top-left-box, .bottom-left-box, .middle-box, .right-box {
   flex: 1; /* Each box will take equal width */
+  overflow: hidden; /* Ensure contents do not overflow the box */
+
 }
+
+
 h2 {
   margin-top: 0; /* Remove default margin */
   margin-bottom: 10px; /* Adjust bottom margin if necessary */
   transform: translateY(-10px); /* Adjust the value as needed */
 }
 
+.event-brawlers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* Adjust gap between images */
+}
+
+
+.event-brawler-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-icon, .brawler-icon {
+  width: 45px; /* Adjust the size as needed */
+  height: 45px; /* Adjust the size as needed */
+  border-radius: 10px;
+}
+
+.brawler-icon{
+  margin-left: 10px;
+}
+
+.trophy-header {
+  background-color: #ffc107!important /* Customize the color */
+}
+
+.mode-header {
+  background-color: #890e1c; /* Customize the color */
+}
+
+.player-header {
+  background-color: #3b82f6
+
+  ; /* Customize the color */
+}
+
+.meta-header {
+  background-color: #5c9b15; /* Customize the color */
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

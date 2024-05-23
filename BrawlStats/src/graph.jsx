@@ -38,7 +38,7 @@ function TrophyGraph({ playerTag }) {
         label: 'Trophy Progression',
         data: cumulativeTrophies,
         fill: false,
-        borderColor: '#aa00ff',
+        borderColor: '#ffc107',
         tension: 0.1
       }
     ]
