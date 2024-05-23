@@ -196,6 +196,46 @@ input {
   margin-left: 50px;
 }
 
+.box left-box {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.top-left-box, .bottom-left-box{
+  flex: 1;
+  padding: 20px;
+  border: 2px solid #ccc;
+  margin: 10px 0;
+  border-radius: 10px;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.top-left-box {
+  height: calc(50% - 67px); /* Adjust height to take half the height minus margin */
+  margin-bottom: 20px;
+}
+
+.bottom-left-box {
+  height: calc(50% - 61px); /* Adjust height to take half the height minus margin */
+  margin-top: 10px;
+}
+
+.top-left-box, .bottom-left-box, .middle-box, .right-box {
+  flex: 1; /* Each box will take equal width */
+}
+h2 {
+  margin-top: 0; /* Remove default margin */
+  margin-bottom: 10px; /* Adjust bottom margin if necessary */
+  transform: translateY(-10px); /* Adjust the value as needed */
+}
 
 
 /* Responsive adjustments */

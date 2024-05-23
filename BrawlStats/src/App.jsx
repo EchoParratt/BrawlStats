@@ -121,9 +121,16 @@ function App() {
       {error && <p className="error-message">{error}</p>}
       {!loading && playerData && (
         <div className="content-container">
-          <div className="box left-box">
-            <h2>Trophy Progression</h2>
-            <TrophyGraph playerTag={playerTag}/>
+          <div className='left column'>
+            <div className="top-left-box">
+              <h2>Trophy Progression</h2>
+              <TrophyGraph playerTag={playerTag}/>
+            </div>
+            <div className="bottom-left-box">
+              {/* Add content here for the bottom left box */}
+              <h2>Additional Content</h2>
+              <p>Placeholder for additional content.</p>
+            </div>
           </div>
           <div className="box middle-box">
             <h2>Player Information</h2>
