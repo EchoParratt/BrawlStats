@@ -232,7 +232,7 @@ input {
   width: 400px;
 }
 
-.top-left-box, .bottom-left-box{
+.top-left-box, .bottom-left-box, .bottom-bottom-left-box{
   flex: 1;
   padding: 20px;
   margin: 10px 0;
@@ -253,9 +253,15 @@ input {
 .bottom-left-box {
   height: calc(50% - 168px); /* Adjust height to take half the height minus margin */
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.top-left-box, .bottom-left-box, .middle-box, .right-box {
+.bottom-bottom-left-box{
+  margin-top: 10px;
+  height: 108px;
+}
+
+.top-left-box, .bottom-left-box, .middle-box, .right-box, .bottom-bottom-left-box {
   flex: 1; /* Each box will take equal width */
   overflow: hidden; /* Ensure contents do not overflow the box */
 

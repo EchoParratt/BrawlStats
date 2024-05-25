@@ -31,6 +31,7 @@ import k_icon from "./assets/k.webp"
 import gg_icon from "./assets/gg.webp"
 import belle_icon_3d from "./assets/belle_3D.webp"
 import gale_icon_3d from "./assets/gale_3D.webp"
+import sandy_icon_3d from "./assets/sandy_3D.webp"
 
 
 
@@ -102,7 +103,8 @@ function App() {
 
   const brawlerIcons3d = {
     BELLE: belle_icon_3d,
-    GALE: gale_icon_3d
+    GALE: gale_icon_3d,
+    SANDY: sandy_icon_3d
 
     // Add other mappings as necessary
   };
@@ -188,6 +190,11 @@ function App() {
                     <img src={getBrawlerIcon(item.brawler.toUpperCase())} alt={item.brawler} className="brawler-icon" />
                   </div>
                 ))}
+              </div>
+            </div>
+            <div className= 'bottom-bottom-left-box'>
+              <div className ='box-header info-header'>
+                <h2>Info Box</h2>
               </div>
             </div>
           </div>
