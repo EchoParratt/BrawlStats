@@ -29,6 +29,8 @@ import hz_icon from "./assets/hz.webp"
 import bb_icon from "./assets/bb.webp"
 import k_icon from "./assets/k.webp"
 import gg_icon from "./assets/gg.webp"
+import belle_icon_3d from "./assets/belle_3D.webp"
+import gale_icon_3d from "./assets/gale_3D.webp"
 
 
 
@@ -98,6 +100,13 @@ function App() {
     // Add other mappings as necessary
   };
 
+  const brawlerIcons3d = {
+    BELLE: belle_icon_3d,
+    GALE: gale_icon_3d
+
+    // Add other mappings as necessary
+  };
+
   const eventIcons = {
     bb_brawler: bb_icon,
     k_brawler: k_icon,
@@ -110,6 +119,12 @@ function App() {
   const getBrawlerIcon = (brawlerName) => {
     return brawlerIcons[brawlerName] || leon_icon; // Return the brawler icon or a default icon if not found
   };
+
+  const getBrawlerIcon3d = (brawlerName) => {
+    return brawlerIcons3d[brawlerName] || belle_icon_3d; // Return the brawler icon or a default icon if not found
+  };
+
+
 
 
   return (
@@ -185,15 +200,15 @@ function App() {
             <p><strong>Club:</strong> {playerData.club}<strong><img src = {club_icon} className='icon-small'/></strong></p>
             <p><strong>Win Rate:</strong> {playerData.win_rate}</p>
             <p><strong>Most Played:</strong> {playerData.most_played_brawler}</p>
-            <img className='mpb' src={getBrawlerIcon(playerData.most_played_brawler)} alt="Most Played Brawler" />
+            <img className='mpb' src={getBrawlerIcon3d(playerData.most_played_brawler)} alt="Most Played Brawler" />
             <p><strong>Most Wins:</strong> {playerData.highest_win_ratio_brawler} <strong>/</strong> {playerData.highest_wins}</p>
-            <img className='wrb' src={getBrawlerIcon(playerData.highest_win_ratio_brawler)} alt="Best Win Rate Brawler" />
+            <img className='wrb' src={getBrawlerIcon3d(playerData.highest_win_ratio_brawler)} alt="Best Win Rate Brawler" />
           </div>
           <div className="box right-box">
             <div className ='box-header meta-header'>
               <h2>Current Meta</h2>
             </div>
-            {playerData.top_8_brawlers && playerData.top_8_brawlers.map((brawler, index) => (
+            {playerData.top_9_brawlers && playerData.top_9_brawlers.map((brawler, index) => (
               <div key={index} className ='brawler-info'>
                 <span className="brawler-name">{brawler.name}</span>
                 <span className='brawler-win-rate'>Win Rate: {brawler.winRate}</span>

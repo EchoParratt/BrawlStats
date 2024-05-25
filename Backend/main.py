@@ -133,10 +133,10 @@ def get_top_brawler():
 
     if tables:
         df = tables[0]  # Assume the first table is the correct one
-        top_eight_brawlers = df.head(8)
+        top_nine_brawlers = df.head(9)
         top_brawlers_info = [
         {"name": row['Brawler'], "winRate": row['Adjusted Win Rate']}
-        for index, row in top_eight_brawlers.iterrows()
+        for index, row in top_nine_brawlers.iterrows()
         ]
         return top_brawlers_info
     else:
@@ -290,7 +290,7 @@ def get_player_data(player_tag):
             "most_played_count": most_played_count,
             "highest_win_ratio_brawler": brawler,
             "highest_wins": wins,
-            "top_8_brawlers" : top_stars,
+            "top_9_brawlers" : top_stars,
             "trophy_changes": trophy_changes,
             "starting_trophies": starting_trophies,
             "bb_brawler": bb_brawler,

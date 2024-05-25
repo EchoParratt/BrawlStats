@@ -13,19 +13,20 @@ body, html {
   align-items: center;
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
-  background-color: #1b1b1b; /* Light grey background */
+  background-color: #18181B; /* Light grey background */
 }
 
 .box {
   flex: 1; /* Each box will take equal width */
   padding: 20px; /* Padding inside each box */
-  border: 2px solid #ccc; /* Light grey border for boxes */
   margin: 10px;
   border-radius: 10px; /* Rounded corners for boxes */
   display: flex;
   flex-direction: column; /* Makes the content of the boxes stack vertically */
   width: 400px;
   overflow: hidden; /* Ensure contents do not overflow the box */
+  background-color: #2A2A2D;
+  color: #B6B6B8
 
 }
 
@@ -119,9 +120,8 @@ h1{
 }
 
 .mpb, .wrb {
-  border-radius: 20px;
-  height: 80px;
-  width: 80px;
+  height: 110px;
+  width: 110px;
 }
 
 /* Form styling */
@@ -223,6 +223,7 @@ input {
   display: flex;
   flex-direction: column;
   width: 400px;
+
 }
 
 .left-column {
@@ -234,20 +235,23 @@ input {
 .top-left-box, .bottom-left-box{
   flex: 1;
   padding: 20px;
-  border: 2px solid #ccc;
   margin: 10px 0;
   border-radius: 10px;
   flex-direction: column;
   margin-right: 10px;
+  background-color: #2A2A2D;
+  color: #B6B6B8
+
 }
 
 .top-left-box {
-  height: calc(50% - 40px); /* Adjust height to take half the height minus margin */
+  height: calc(50% - 100x); /* Adjust height to take half the height minus margin */
   margin-bottom: 20px;
+  margin-top: 11px;
 }
 
 .bottom-left-box {
-  height: calc(50% - 88px); /* Adjust height to take half the height minus margin */
+  height: calc(50% - 168px); /* Adjust height to take half the height minus margin */
   margin-top: 10px;
 }
 

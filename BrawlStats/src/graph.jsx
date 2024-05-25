@@ -53,7 +53,7 @@ function TrophyGraph({ playerTag }) {
     scales: {
       x: {
         ticks: {
-          color: '#FFFFFF', // Change the color of the text (labels)
+          color: '#B6B6B8', // Change the color of the text (labels)
           font: {
             size: 12, // Change font size
             family: 'Roboto Mono', // Change font family
@@ -65,7 +65,7 @@ function TrophyGraph({ playerTag }) {
       },
       y: {
         ticks: {
-          color: '#FFFFFF', // Change the color of the text (labels)
+          color: '#B6B6B8', // Change the color of the text (labels)
           font: {
             size: 12, // Change font size
             family: 'Roboto Mono', // Change font family
