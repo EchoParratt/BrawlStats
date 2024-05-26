@@ -4,9 +4,11 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto'; // This is needed for Chart.js v3 and above
 
 function TrophyGraph({ playerTag }) {
+// State hooks for trophy data and starting trophies
   const [trophyData, setTrophyData] = useState([]);
   const [startingTrophies, setStartingTrophies] = useState(0);
 
+// useEffect hook to fetch data when the component mounts or playerTag changes
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,14 +25,15 @@ function TrophyGraph({ playerTag }) {
 
     fetchData();
   }, [playerTag]);
-
+// Calculate cumulative trophies from trophy changes
   const cumulativeTrophies = trophyData.reduce((acc, change) => {
     const lastValue = acc.length > 0 ? acc[acc.length - 1] : startingTrophies;
     return [...acc, lastValue + change];
   }, []);
 
   console.log('Cumulative Trophies:', cumulativeTrophies); // Debugging line
-
+  
+  // Data for the Line chart
   const data = {
     labels: Array.from({ length: trophyData.length }, (_, i) => `Game ${i + 1}`),
     datasets: [
@@ -43,7 +46,8 @@ function TrophyGraph({ playerTag }) {
       }
     ]
   };
-
+  
+  //Options for the line chart
   const options = {
     plugins: {
       legend: {

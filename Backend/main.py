@@ -4,16 +4,19 @@ import brawlstats
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import pandas as pd
 
-app = Flask(__name__)
+# The backend is initialized with Flask and Flask-CORS to handle cross-origin requests
+app = Flask(__name__) 
 CORS(app)
 
+# A client instance is created to interact with the Brawl Stars API
 token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjE3YWQzYjMyLTY1ZDYtNGQxYS04YjU1LTZhMmUwN2IzMTEzYiIsImlhdCI6MTcxNjA3MDMwMCwic3ViIjoiZGV2ZWxvcGVyL2JhZDg3OWQyLTVhYmMtOWEyZi1jNzk4LTA5YWRlNzMwMDhkNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzAuNjYuMTU3LjEzNSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.YldRTfEFDJbGX3KJ0LDCFIxDjLlyrO0yR0hbLvOA7PWUBwRPEP6H2IqVv_cSC_k2rW9Daq1H7TdS3sHk59NPpg'
 client = brawlstats.Client(token, is_async=False)
 
-
+# Analyzes battle logs to calculate win rate, win count, loss count, and total battles
 def analyze_battle_logs(battle_logs):
     win_count = 0
     loss_count = 0
@@ -22,7 +25,6 @@ def analyze_battle_logs(battle_logs):
     print("Total Battle Logs Fetched:", len(battle_logs))  # Debugging output
 
     for battle in battle_logs:
-        # Use the .get() method to avoid KeyError if 'trophyChange' does not exist
         trophy_change = battle.battle.get('trophy_change', None)
         if trophy_change is not None:  # Check if trophyChange is present
             total_battles += 1
@@ -30,9 +32,7 @@ def analyze_battle_logs(battle_logs):
                 win_count += 1
             elif trophy_change < 0:
                 loss_count += 1
-        #else:
-            #print("No trophyChange in this battle:", battle)  # Print the battle log for inspection
-
+        
     if total_battles > 0:
         win_rate = (win_count / total_battles) * 100
     else:
@@ -40,11 +40,12 @@ def analyze_battle_logs(battle_logs):
 
     return win_rate, win_count, loss_count, total_battles
 
+# Processes battle logs to calculate trophy changes and starting trophies:
 def process_battle_logs(battle_logs, current_trophies):
     trophy_changes = []
 
     for battle in battle_logs:
-        trophy_change = battle.battle.get('trophy_change', 0)  # Assuming 'trophyChange' is the key for trophy gain/loss
+        trophy_change = battle.battle.get('trophy_change', 0) 
         trophy_changes.append(trophy_change)
 
     total_trophy_change = sum(trophy_changes)
@@ -52,17 +53,13 @@ def process_battle_logs(battle_logs, current_trophies):
 
     return trophy_changes, starting_trophies
 
+# Finds the most played brawler by the player
 def find_most_played_brawler(battle_logs,player_tag):
     brawler_count = {}
 
     for battle in battle_logs:
-        #print(battle)
         for team in battle.battle.get('teams', []):
-            #print(team)
             for player in team:
-                #print(player.get('tag'))
-                #print(player.get('tag'))
-                #print(player_tag)
                 if player.get('tag') == player_tag:
                     brawler_name = player.get('brawler', {}).get('name', None)
                     print(brawler_name)
@@ -78,6 +75,7 @@ def find_most_played_brawler(battle_logs,player_tag):
 
     return most_played_brawler, most_played_count
 
+# Finds the brawler with the highest win ratio for the player
 def find_brawler_with_highest_win_ratio(battle_logs, player_tag):
     brawler_stats = {}
 
@@ -109,11 +107,9 @@ def find_brawler_with_highest_win_ratio(battle_logs, player_tag):
 
     return brawler_with_highest_win_ratio, highest_wins
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+# These functions use Selenium to scrape data from the Brawl Time Ninja website
 
+# Fetches the top 9 brawlers by win rate
 def get_top_brawler():
     # Set up Chrome options
     chrome_options = Options()
@@ -132,7 +128,7 @@ def get_top_brawler():
     tables = pd.read_html(html)
 
     if tables:
-        df = tables[0]  # Assume the first table is the correct one
+        df = tables[0]  
         top_nine_brawlers = df.head(9)
         top_brawlers_info = [
         {"name": row['Brawler'], "winRate": row['Adjusted Win Rate']}
@@ -141,6 +137,8 @@ def get_top_brawler():
         return top_brawlers_info
     else:
         return "No tables found"
+
+# The below 6 functions fetch the best current brawler for each game mode based off win-rate
 
 def brawl_ball():
     chrome_options = Options()
@@ -262,9 +260,12 @@ def showdown():
     for index, row in s_brawler.iterrows():
         return f"{row['Brawler']}"
 
+# Flask Route
+# Defines the endpoint to fetch player data and analyze battle logs
 
-@app.route('/player/<player_tag>', methods=['GET'])
-def get_player_data(player_tag):
+@app.route('/player/<player_tag>', methods=['GET']) # Defines the URL path for the endpoint
+# This function is called when a request is made to the /player/<player_tag> endpoint
+def get_player_data(player_tag):    
     try:
         player = client.get_player(player_tag)
         battle_logs = client.get_battle_logs(player_tag)

@@ -13,9 +13,10 @@ body, html {
   align-items: center;
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
-  background-color: #18181B; /* Light grey background */
+  background-color: #18181B; /* Dark background */
 }
 
+/* Box styling */
 .box {
   flex: 1; /* Each box will take equal width */
   padding: 20px; /* Padding inside each box */
@@ -27,7 +28,6 @@ body, html {
   overflow: hidden; /* Ensure contents do not overflow the box */
   background-color: #2A2A2D;
   color: #B6B6B8
-
 }
 
 .right-box {
@@ -83,19 +83,11 @@ h1{
   height: 56px;
 }
 
-
-
 .box-header h2 {
   margin: 0;
   color: #fff;
   font-size: 1.5em;
- 
 }
-
-
-
-
-
 
 .icon-small {
   width: 20px;
@@ -138,7 +130,6 @@ input {
   border-radius: 5px; /* Rounded corners for the input field */
   font-family: 'Roboto Mono', monospace;
   margin-left: 580px;
-
 }
 
 /* Button styling */
@@ -169,12 +160,7 @@ input {
   margin-top: 20px;
   font-family: 'Roboto Mono', monospace;
   margin-left: 655px;
-  
-
 }
-
-
-
 
 .button:hover,
 .button-7:focus {
@@ -192,7 +178,6 @@ input {
   text-align: left; /* Align text to the left */
 }
 
-
 .brawler-info .brawler-name {
   width: 80px; /* Set a fixed width for the brawler name */
 }
@@ -201,11 +186,9 @@ input {
   width: 100px; /* Set a fixed width for the win rate */
 }
 
-
 .button:focus {
   box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
 }
-
 
 .button:active {
   background-color: #0064bd;
@@ -223,7 +206,6 @@ input {
   display: flex;
   flex-direction: column;
   width: 400px;
-
 }
 
 .left-column {
@@ -241,7 +223,6 @@ input {
   margin-right: 10px;
   background-color: #2A2A2D;
   color: #B6B6B8
-
 }
 
 .top-left-box {
@@ -264,9 +245,7 @@ input {
 .top-left-box, .bottom-left-box, .middle-box, .right-box, .bottom-bottom-left-box {
   flex: 1; /* Each box will take equal width */
   overflow: hidden; /* Ensure contents do not overflow the box */
-
 }
-
 
 h2 {
   margin-top: 0; /* Remove default margin */
@@ -279,7 +258,6 @@ h2 {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px; /* Adjust gap between images */
 }
-
 
 .event-brawler-pair {
   display: flex;
@@ -306,9 +284,7 @@ h2 {
 }
 
 .player-header {
-  background-color: #3b82f6
-
-  ; /* Customize the color */
+  background-color: #3b82f6;
 }
 
 .meta-header {

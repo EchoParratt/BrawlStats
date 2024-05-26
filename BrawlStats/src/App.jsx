@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import TrophyGraph from './graph.jsx';
+import './App.css';
+
+// Importing assets
 import belle_icon from "./assets/Belle_Portrait.webp";  
 import leon_icon from "./assets/Leon_Portrait.webp";
 import jessie_icon from "./assets/Jessie_Portrait.webp";
@@ -37,21 +41,18 @@ import sandy_icon_3d from "./assets/sandy_3D.webp"
 
 
 import { square } from 'ldrs'
+square.register() // Initializing the loading square
 
-square.register()
 
-// Default values shown
-
-import TrophyGraph from './graph.jsx';
-import './App.css';
 
 function App() {
+  // State hooks
   const [playerTag, setPlayerTag] = useState('');
   const [playerData, setPlayerData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false); 
 
-
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form submitted with playerTag:", playerTag);
@@ -76,6 +77,7 @@ function App() {
     }
   };
   
+  // Brawler icons mapping (2D)
   const brawlerIcons = {
     BELLE: belle_icon,
     LEON: leon_icon,
@@ -101,6 +103,7 @@ function App() {
     // Add other mappings as necessary
   };
 
+  // Brawler icon mapping (3D)
   const brawlerIcons3d = {
     BELLE: belle_icon_3d,
     GALE: gale_icon_3d,
@@ -109,6 +112,7 @@ function App() {
     // Add other mappings as necessary
   };
 
+  // Brawl stars game mode icon mapping
   const eventIcons = {
     bb_brawler: bb_icon,
     k_brawler: k_icon,
@@ -118,10 +122,12 @@ function App() {
     s_brawler: s_icon
   };
 
+  // Get the appropriate icon for a brawler (2D)
   const getBrawlerIcon = (brawlerName) => {
     return brawlerIcons[brawlerName] || leon_icon; // Return the brawler icon or a default icon if not found
   };
 
+  // Get the appropriate icon for a brawler (3D)
   const getBrawlerIcon3d = (brawlerName) => {
     return brawlerIcons3d[brawlerName] || belle_icon_3d; // Return the brawler icon or a default icon if not found
   };
