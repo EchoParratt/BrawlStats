@@ -311,3 +311,7 @@ def get_player_data(player_tag):
 if __name__ == '__main__':
     app.run(debug=True)
 
+# export app for testing
+export_app = app
+
+
