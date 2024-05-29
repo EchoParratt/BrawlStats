@@ -13,7 +13,7 @@ BrawlStats is a full-stack web application that allows users to fetch and displa
 
 ## Technologies
 
-This project uses the BrawlStats libary as a sync and async wrapper for the Brawl Stars API
+This project uses the BrawlStats library as a sync and async wrapper for the Brawl Stars API
 
 ### Frontend
 - React
