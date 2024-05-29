@@ -36,6 +36,8 @@ import gg_icon from "./assets/gg.webp"
 import belle_icon_3d from "./assets/belle_3D.webp"
 import gale_icon_3d from "./assets/gale_3D.webp"
 import sandy_icon_3d from "./assets/sandy_3D.webp"
+import bibi_icon_3d from "./assets/bibi_3D.webp"
+import gus_icon_3d from "./assets/gus_3D.webp"
 
 
 
@@ -107,7 +109,9 @@ function App() {
   const brawlerIcons3d = {
     BELLE: belle_icon_3d,
     GALE: gale_icon_3d,
-    SANDY: sandy_icon_3d
+    SANDY: sandy_icon_3d,
+    BIBI: bibi_icon_3d,
+    GUS: gus_icon_3d
 
     // Add other mappings as necessary
   };
