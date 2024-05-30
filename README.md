@@ -20,6 +20,7 @@ This project uses the BrawlStats library as a sync and async wrapper for the Bra
 - Axios
 - [Chart.js](https://www.chartjs.org/)
 - CSS
+- [LDRS](https://uiball.com/ldrs/)
 ### Backend
 - Flask
 - Flask-CORS
