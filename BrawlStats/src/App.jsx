@@ -4,6 +4,8 @@ import TrophyGraph from './graph.jsx';
 import './App.css';
 
 // Importing assets
+
+// 2D icons
 import belle_icon from "./assets/Belle_Portrait.webp";  
 import leon_icon from "./assets/Leon_Portrait.webp";
 import jessie_icon from "./assets/Jessie_Portrait.webp";
@@ -29,12 +31,16 @@ import eve_icon from "./assets/Eve_Portrait.webp"
 import ash_icon from "./assets/Ash_Portrait.webp"
 import nita_icon from "./assets/Nita_Portrait.webp"
 import draco_icon from "./assets/Draco_Portrait.webp"
+
+// Game mode icons
 import s_icon from "./assets/s.webp"
 import w_icon from "./assets/w.webp"
 import hz_icon from "./assets/hz.webp"
 import bb_icon from "./assets/bb.webp"
 import k_icon from "./assets/k.webp"
 import gg_icon from "./assets/gg.webp"
+
+// 3D icons
 import belle_icon_3d from "./assets/belle_3D.webp"
 import gale_icon_3d from "./assets/gale_3D.webp"
 import sandy_icon_3d from "./assets/sandy_3D.webp"
