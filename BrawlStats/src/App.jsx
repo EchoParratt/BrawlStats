@@ -27,6 +27,8 @@ import amber_icon from "./assets/Amber_Portrait.webp"
 import ruffs_icon from "./assets/Ruffs_Portrait.webp"
 import eve_icon from "./assets/Eve_Portrait.webp"
 import ash_icon from "./assets/Ash_Portrait.webp"
+import nita_icon from "./assets/Nita_Portrait.webp"
+import draco_icon from "./assets/Draco_Portrait.webp"
 import s_icon from "./assets/s.webp"
 import w_icon from "./assets/w.webp"
 import hz_icon from "./assets/hz.webp"
@@ -38,6 +40,8 @@ import gale_icon_3d from "./assets/gale_3D.webp"
 import sandy_icon_3d from "./assets/sandy_3D.webp"
 import bibi_icon_3d from "./assets/bibi_3D.webp"
 import gus_icon_3d from "./assets/gus_3D.webp"
+import buster_icon_3d from "./assets/buster_3D.webp"
+import dynamike_icon_3d from "./assets/dynamike_3D.webp"
 
 
 
@@ -100,7 +104,9 @@ function App() {
     EVE: eve_icon,
     AMBER: amber_icon,
     RUFFS: ruffs_icon,
-    ASH: ash_icon
+    ASH: ash_icon,
+    NITA: nita_icon,
+    DRACO: draco_icon
 
     // Add other mappings as necessary
   };
@@ -111,7 +117,9 @@ function App() {
     GALE: gale_icon_3d,
     SANDY: sandy_icon_3d,
     BIBI: bibi_icon_3d,
-    GUS: gus_icon_3d
+    GUS: gus_icon_3d,
+    BUSTER: buster_icon_3d,
+    DYNAMIKE: dynamike_icon_3d
 
     // Add other mappings as necessary
   };
@@ -204,8 +212,9 @@ function App() {
             </div>
             <div className= 'bottom-bottom-left-box'>
               <div className ='box-header info-header'>
-                <h2>Info Box</h2>
+                <h2>Info</h2>
               </div>
+              <p className='info-text'>Player Stats are based off the last 25 games</p>
             </div>
           </div>
           <div className="box middle-box">
