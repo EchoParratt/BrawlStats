@@ -28,6 +28,7 @@ This project uses the BrawlStats library as a sync and async wrapper for the Bra
 - Selenium
 - Python
 - [BrawlStats](https://brawlstats.readthedocs.io/en/latest/index.html)
+- Pandas
 
 ## Screenshots
 ### Landing Page
