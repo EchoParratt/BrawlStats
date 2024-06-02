@@ -31,7 +31,7 @@ import eve_icon from "./assets/Eve_Portrait.webp"
 import ash_icon from "./assets/Ash_Portrait.webp"
 import nita_icon from "./assets/Nita_Portrait.webp"
 import draco_icon from "./assets/Draco_Portrait.webp"
-
+import rosa_icon from "./assets/Rosa_Portrait.webp"
 // Game mode icons
 import s_icon from "./assets/s.webp"
 import w_icon from "./assets/w.webp"
@@ -48,7 +48,7 @@ import bibi_icon_3d from "./assets/bibi_3D.webp"
 import gus_icon_3d from "./assets/gus_3D.webp"
 import buster_icon_3d from "./assets/buster_3D.webp"
 import dynamike_icon_3d from "./assets/dynamike_3D.webp"
-
+import poco_icon_3d from "./assets/poco_3D.webp"
 
 
 
@@ -112,7 +112,9 @@ function App() {
     RUFFS: ruffs_icon,
     ASH: ash_icon,
     NITA: nita_icon,
-    DRACO: draco_icon
+    DRACO: draco_icon,
+    ROSA: rosa_icon
+
 
     // Add other mappings as necessary
   };
@@ -125,7 +127,8 @@ function App() {
     BIBI: bibi_icon_3d,
     GUS: gus_icon_3d,
     BUSTER: buster_icon_3d,
-    DYNAMIKE: dynamike_icon_3d
+    DYNAMIKE: dynamike_icon_3d,
+    POCO: poco_icon_3d
 
     // Add other mappings as necessary
   };
