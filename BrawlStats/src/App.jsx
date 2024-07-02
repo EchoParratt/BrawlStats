@@ -32,6 +32,7 @@ import ash_icon from "./assets/Ash_Portrait.webp"
 import nita_icon from "./assets/Nita_Portrait.webp"
 import draco_icon from "./assets/Draco_Portrait.webp"
 import rosa_icon from "./assets/Rosa_Portrait.webp"
+import berry_icon from "./assets/Berry_Portrait.webp"
 // Game mode icons
 import s_icon from "./assets/s.webp"
 import w_icon from "./assets/w.webp"
@@ -113,7 +114,8 @@ function App() {
     ASH: ash_icon,
     NITA: nita_icon,
     DRACO: draco_icon,
-    ROSA: rosa_icon
+    ROSA: rosa_icon,
+    BERRY: berry_icon
 
 
     // Add other mappings as necessary

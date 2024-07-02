@@ -1,19 +1,40 @@
 import brawlstats
+import logging
+import time
+
+
+# Enable logging
+logging.basicConfig(level=logging.DEBUG)
 
 # Replace 'your_api_key_here' with your actual Brawl Stars API key
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjZlMDhjZjFmLTM5ODEtNDVmYS1iNjU3LWQwYWQwYTg3YzEyMSIsImlhdCI6MTcxNTg0MTY1NCwic3ViIjoiZGV2ZWxvcGVyL2JhZDg3OWQyLTVhYmMtOWEyZi1jNzk4LTA5YWRlNzMwMDhkNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzAuNjYuMTU3LjEzNSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.-OWA7QtwsZ51JduTNJDlfGFCfJ1QwznHvGDnvxysW00eH27zAZzZgNbMbjQAfjCLQ-x1jYehFHuXUPPHsZzmpw'
-client = brawlstats.Client(token, is_async=False)
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjZjYzBlZWU2LWVlOWQtNGVlZi1hZDE2LTIwNmU2MGMzNzJiYiIsImlhdCI6MTcxOTcxMDU2NCwic3ViIjoiZGV2ZWxvcGVyL2JhZDg3OWQyLTVhYmMtOWEyZi1jNzk4LTA5YWRlNzMwMDhkNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzAuNjYuMTU3LjEzNSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.4qwmrOBFPSYJraxbkla0j8gTmjvgQAjkRFhb8DDPv_zbqRyPpYxXg6emTuR2GWBTzCeM4Hfnsg_MCsl3-7ojNA'
+#client = brawlstats.Client(token, is_async=False)
 rain_player_tag = '#2UJVL0CL'
 player_tag = '#8J2Y2VCC'
 eli_player_tag = '#Y0CL0VC'
 
-#try:
-    # Fetch player data using their tag
-    #player = client.get_player(player_tag)
-    #battle_log = client.get_battle_logs(player_tag)
-    #print(player.name, player.trophies,player.club.name)
-#finally:
-    #client.close()
+
+
+
+def get_brawlers_info():
+    client = None
+    for attempt in range(5):  # Retry 5 times
+        try:
+            client = brawlstats.Client(token, is_async=False, debug=True)
+            brawlers_info = client.get_brawlers()
+            print(brawlers_info)
+            return brawlers_info
+        except brawlstats.errors.UnexpectedError as e:
+            print(f"UnexpectedError: {e}. Retrying... (Attempt {attempt + 1}/5)")
+            time.sleep(5)  # Wait 5 seconds before retrying
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break
+    return None
+
+if __name__ == "__main__":
+    get_brawlers_info()
+
 
 def analyze_battle_logs(battle_logs):
     win_count = 0
